@@ -1,52 +1,46 @@
+# 2do4lazy
+
 2do4lazy is a modern task management application built with React and Vite. It uses Google’s Gemini API to intelligently parse natural language input into structured tasks with title, time, venue, and category. The app also includes a regex fallback extractor so tasks can still be added if the API is unavailable.
 
-Features
+---
 
-Add tasks using natural language input
+## Features
 
-Example: Meeting about Python dependencies in AB1-324 at 9pm
+- Add tasks using natural language input  
+  - Example: `Meeting about Python dependencies in AB1-324 at 9pm`
+- Automatic task parsing with Gemini AI  
+- Regex-based fallback task extraction  
+- Task categorization into: Work, School, Chores, and Projects  
+- Persistent storage with localStorage  
+- Dark mode and light mode toggle  
+- Responsive sidebar with category filtering  
+- Beautiful UI with a matrix-style animated background  
+- Interactive features:  
+  - Mark tasks as completed  
+  - Delete tasks  
+  - Filter tasks by category  
 
-Automatic task parsing with Gemini AI
+---
 
-Regex-based fallback task extraction
+## Tech Stack
 
-Task categorization into: Work, School, Chores, and Projects
+- **React 19** for the UI  
+- **Vite 7** for fast builds and hot reload  
+- **lucide-react** for icons  
+- **Google Gemini API** for natural language processing  
+- **localStorage** for persistence  
 
-Persistent storage with localStorage
+---
 
-Dark mode and light mode toggle
-
-Responsive sidebar with category filtering
-
-Beautiful UI with a matrix-style animated background
-
-Interactive features
-
-Mark tasks as completed
-
-Delete tasks
-
-Filter tasks by category
-
-Tech Stack
-
-React 19 for the UI
-
-Vite 7 for fast builds and hot reload
-
-lucide-react for icons
-
-Google Gemini API for natural language processing
-
-localStorage for persistence
-
-Installation
+## Installation
 
 Clone this repository:
 
+```bash
 git clone https://github.com/your-username/smart-todo-app.git
 cd smart-todo-app
 
+```
 
 Install dependencies:
 
@@ -69,7 +63,9 @@ Run the app locally:
 npm run dev
 
 
-The app will start on http://localhost:5173 (default Vite port).
+The app will start on http://localhost:5173
+ (default Vite port).
+ 
 
 Build
 
@@ -83,8 +79,8 @@ Preview the production build locally:
 npm run preview
 
 Task Extraction Logic
+With Gemini
 
-With Gemini:
 Gemini returns a JSON object with fields:
 
 {
@@ -94,8 +90,8 @@ Gemini returns a JSON object with fields:
   "category": "work"
 }
 
+Fallback (regex)
 
-Fallback (regex):
 If Gemini is unavailable or returns invalid output, the regex fallback extracts title, time, venue, and assigns a best-guess category.
 
 Project Structure
