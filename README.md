@@ -1,6 +1,4 @@
-SmartTodoApp
-
-SmartTodoApp is a modern task management application built with React and Vite. It uses Google’s Gemini API to intelligently parse natural language input into structured tasks with title, time, venue, and category. The app also includes a regex fallback extractor so tasks can still be added if the API is unavailable.
+2do4lazy is a modern task management application built with React and Vite. It uses Google’s Gemini API to intelligently parse natural language input into structured tasks with title, time, venue, and category. The app also includes a regex fallback extractor so tasks can still be added if the API is unavailable.
 
 Features
 
