@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Clock, MapPin, X, Check, Sun, Moon } from 'lucide-react';
 
+
 const SmartTodoApp = () => {
   const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState('');
@@ -8,7 +9,31 @@ const SmartTodoApp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Replace with your actual Gemini API key
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('smartTodos');
+    const savedDarkMode = localStorage.getItem('smartTodosDarkMode');
+    
+    if (savedTodos) {
+      try {
+        setTodos(JSON.parse(savedTodos));
+      } catch (error) {
+        console.error('Error loading todos from localStorage:', error);
+      }
+    }
+    
+    if (savedDarkMode) {
+      setIsDarkMode(JSON.parse(savedDarkMode));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('smartTodos', JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('smartTodosDarkMode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
   const GEMINI_API_KEY = 'AIzaSyBKe2u-zUb7FCExb0tjqm2JlRUHB5q---I';
   const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
 
@@ -153,7 +178,75 @@ Text: "${text}"`;
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
-        
+        /* Matrix Background Styles */
+        .matrix-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+          z-index: -1;
+          overflow: hidden;
+        }
+
+        .matrix-pattern {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        .matrix-column {
+          position: absolute;
+          top: -100%;
+          width: 20px;
+          height: 100%;
+          font-size: 16px;
+          line-height: 18px;
+          font-weight: bold;
+          animation: fall linear infinite;
+          white-space: nowrap;
+        }
+
+        .matrix-column::before {
+          content: "SELECT ME SELECT ME SELECT ME SELECT ME SELECT ME";
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 5%,
+            #00ff41 10%,
+            #00ff41 20%,
+            #00dd33 30%,
+            #00bb22 40%,
+            #009911 50%,
+            #007700 60%,
+            #005500 70%,
+            #003300 80%,
+            rgba(0, 255, 65, 0.5) 90%,
+            transparent 100%
+          );
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          writing-mode: vertical-lr;
+          letter-spacing: 1px;
+        }
+
+        /* Add all the nth-child rules and @keyframes from your CSS here */
+
+        @keyframes fall {
+          0% {
+            transform: translateY(-10%);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(200%);
+            opacity: 0;
+          }
+        }
         .menu-button {
           padding: 0.5rem;
           border: none;
@@ -305,10 +398,10 @@ Text: "${text}"`;
         }
         .theme-toggle {
           position: fixed;
-          bottom: 2rem;
-          right: 2rem;
-          width: 3.5rem;
-          height: 3.5rem;
+          top: 1rem;
+          right: 1rem;
+          width: 3rem;
+          height: 3rem;
           border-radius: 50%;
           border: none;
           background-color: #2563eb;
@@ -324,6 +417,15 @@ Text: "${text}"`;
           background-color: #1d4ed8;
         }
       `}</style>
+
+      {/* Matrix Background */}
+      <div className="matrix-container">
+        <div className="matrix-pattern">
+          {Array.from({ length: 40 }, (_, i) => (
+            <div key={i} className="matrix-column"></div>
+          ))}
+        </div>
+      </div>
 
       {/* Sidebar - Always Open */}
       <aside style={{
