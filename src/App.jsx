@@ -634,7 +634,7 @@ Text: "${text}"`;
           {GEMINI_API_KEY === 'AIzaSyBKe2u-zUb7FCExb0tjqm2JlRUHB5q---I' && (
             <div className="demo-warning">
               <p style={{ color: isDarkMode ? '#fbbf24' : '#92400e', fontWeight: '500', margin: 0 }}>
-                <strong>Trust Mode:</strong> Please don't steal my gemini api. pls.
+                <strong>Trust Mode:</strong> Please don't steal my gemini api. pls. update: gemini isn't working. it's working in regex now.
                 <br />
               </p>
             </div>
